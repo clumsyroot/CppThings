@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stack>
+#include <vector>
 
 using namespace std;
 
@@ -95,6 +97,43 @@ public:
             }
             swap(nums1[idx--], nums2[n--]);
         }
+    }
+
+    // 二叉树中序遍历
+    vector<int> inorderTraversal(TreeNode *root)
+    {
+        // 递归
+        // vector<int> ans;
+        // inorderTraversal(root, ans);
+        // return ans;
+
+        // 迭代
+        vector<int> ans;
+        stack<TreeNode *> treeNode;
+        while (root != nullptr || !treeNode.empty())
+        {
+            while (root != nullptr)
+            {
+                treeNode.push(root);
+                root = root->left;
+            }
+            root = treeNode.top();
+            treeNode.pop();
+            ans.push_back(root->val);
+            root = root->right;
+        }
+        return ans;
+    }
+
+    void inorderTraversal(TreeNode *root, vector<int> &ans)
+    {
+        if (!root)
+        {
+            return;
+        }
+        inorderTraversal(root->left, ans);
+        ans.push_back(root->val);
+        inorderTraversal(root->right, ans);
     }
 };
 
