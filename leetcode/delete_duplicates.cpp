@@ -11,6 +11,16 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 class Solution
 {
 public:
@@ -73,14 +83,23 @@ public:
         //     }
         // }
 
-        //优化
-        
+        // 优化
+        int idx = nums1.size() - 1;
+        m--;
+        n--;
+        while (n >= 0)
+        {
+            while (m >= 0 && nums1[m] > nums2[n])
+            {
+                swap(nums1[idx--], nums1[m--]);
+            }
+            swap(nums1[idx--], nums2[n--]);
+        }
     }
 };
 
 int main()
 {
     Solution solution;
-
     return 0;
 }
