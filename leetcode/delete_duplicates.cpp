@@ -108,21 +108,53 @@ public:
         // return ans;
 
         // 迭代
+        // vector<int> ans;
+        // stack<TreeNode *> treeNode;
+        // while (root != nullptr || !treeNode.empty())
+        // {
+        //     while (root != nullptr)
+        //     {
+        //         treeNode.push(root);
+        //         root = root->left;
+        //     }
+        //     root = treeNode.top();
+        //     treeNode.pop();
+        //     ans.push_back(root->val);
+        //     root = root->right;
+        // }
+        // return ans;
+
+        // Morris 中序遍历 -- 空间复杂度仅为 O(1)
         vector<int> ans;
-        stack<TreeNode *> treeNode;
-        while (root != nullptr || !treeNode.empty())
+        TreeNode *predecessor = nullptr;
+        while (root != nullptr)
         {
-            while (root != nullptr)
+            if (root->left != nullptr)
             {
-                treeNode.push(root);
-                root = root->left;
+                predecessor = root->left;
+                while (predecessor->right != nullptr && predecessor->right != root)
+                {
+                    predecessor = predecessor->right;
+                }
+
+                if (predecessor->right == nullptr)
+                {
+                    predecessor->right = root;
+                    root = root->left;
+                }
+                else
+                {
+                    ans.push_back(root->val);
+                    predecessor->right = nullptr;
+                    root = root->left;
+                }
             }
-            root = treeNode.top();
-            treeNode.pop();
-            ans.push_back(root->val);
-            root = root->right;
+            else
+            {
+                ans.push_back(root->val);
+                root = root->right;
+            }
         }
-        return ans;
     }
 
     void inorderTraversal(TreeNode *root, vector<int> &ans)
