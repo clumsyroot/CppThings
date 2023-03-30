@@ -146,7 +146,7 @@ public:
                 {
                     ans.push_back(root->val);
                     predecessor->right = nullptr;
-                    root = root->left;
+                    root = root->right;
                 }
             }
             else
@@ -155,6 +155,7 @@ public:
                 root = root->right;
             }
         }
+        return ans;
     }
 
     void inorderTraversal(TreeNode *root, vector<int> &ans)
@@ -166,6 +167,21 @@ public:
         inorderTraversal(root->left, ans);
         ans.push_back(root->val);
         inorderTraversal(root->right, ans);
+    }
+
+    // 判断两棵树是否相同
+    bool isSameTree(TreeNode *p, TreeNode *q)
+    {
+        // 递归
+        if (p == nullptr && q == nullptr)
+        {
+            return true;
+        }
+        if (p == nullptr || q == nullptr)
+        {
+            return false;
+        }
+        return p->val == q->val && isSameTree(p->left, q->left) && isSameTree(q->right, p->right);
     }
 };
 
