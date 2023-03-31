@@ -20,7 +20,8 @@ struct TreeNode
     TreeNode *right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right)
+        : val(x), left(left), right(right) {}
 };
 
 class Solution
@@ -182,6 +183,19 @@ public:
             return false;
         }
         return p->val == q->val && isSameTree(p->left, q->left) && isSameTree(q->right, p->right);
+    }
+
+    // 判断是否为 对称二叉树
+    bool isSymmetric(TreeNode *root)
+    {
+        if (root == nullptr)
+            return true;
+        if (root->left == nullptr && root->right == nullptr)
+            return true;
+        if (root->left == nullptr || root->right == nullptr)
+            return false;
+
+        return root->left->val == root->right->val && isSymmetric(root->left) && isSymmetric(root->right);
     }
 };
 
