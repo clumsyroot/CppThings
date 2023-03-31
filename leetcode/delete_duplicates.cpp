@@ -21,8 +21,7 @@ struct TreeNode
     TreeNode *right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right)
-        : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
 class Solution
@@ -261,17 +260,51 @@ public:
                 if (node->right)
                 {
                     cur.push(node->right);
-                } 
+                }
                 size--;
             }
             ans++;
         }
         return ans;
     }
+
+    // 将有序数组转换成 二叉搜索树
+    TreeNode *sortedArrayToBST(vector<int> &nums)
+    {
+        // 递归
+        return sortedArrayToBST(nums, 0, nums.size() - 1);
+    }
+
+    TreeNode *sortedArrayToBST(vector<int> &nums, int left, int right)
+    {
+        if (left > right)
+        {
+            return nullptr;
+        }
+        int mid = (left + right) / 2;
+        TreeNode *root = new TreeNode(nums[mid]);
+        root->left = sortedArrayToBST(nums, left, mid - 1);
+        root->right = sortedArrayToBST(nums, mid + 1, right);
+        return root;
+    }
+
+    // 给定一个二叉树, 判断它是否是高度平衡的二叉树
+    bool isBalanced(TreeNode *root)
+    {
+        
+    }
 };
 
 int main()
 {
     Solution solution;
+    vector<int> nums;
+    nums.push_back(0);
+    nums.push_back(1);
+    nums.push_back(2);
+    nums.push_back(3);
+    nums.push_back(4);
+    nums.push_back(5);
+    solution.sortedArrayToBST(nums);
     return 0;
 }
