@@ -188,14 +188,26 @@ public:
     // 判断是否为 对称二叉树
     bool isSymmetric(TreeNode *root)
     {
+        // 递归
         if (root == nullptr)
             return true;
-        if (root->left == nullptr && root->right == nullptr)
-            return true;
-        if (root->left == nullptr || root->right == nullptr)
-            return false;
 
-        return root->left->val == root->right->val && isSymmetric(root->left) && isSymmetric(root->right);
+        return isSymmetric(root->left, root->right);
+
+        
+    }
+
+    bool isSymmetric(TreeNode *p, TreeNode *q)
+    {
+        if (!p && !q)
+        {
+            return true;
+        }
+        if (!p || !q)
+        {
+            return false;
+        }
+        return p->val == q->val && isSymmetric(p->left, q->right) && isSymmetric(p->right, q->left);
     }
 };
 
