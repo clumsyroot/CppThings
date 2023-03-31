@@ -236,7 +236,37 @@ public:
     // 二叉树的最大深度
     int maxDepth(TreeNode *root)
     {
-        
+        if (!root)
+        {
+            return 0;
+        }
+        // 递归、深度优先搜索
+        // return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+
+        // 广度优先搜索
+        queue<TreeNode *> cur;
+        cur.push(root);
+        int ans = 0;
+        while (!cur.empty())
+        {
+            int size = cur.size();
+            while (!cur.empty())
+            {
+                TreeNode *node = cur.front();
+                cur.pop();
+                if (node->left)
+                {
+                    cur.push(node->left);
+                }
+                if (node->right)
+                {
+                    cur.push(node->right);
+                } 
+                size--;
+            }
+            ans++;
+        }
+        return ans;
     }
 };
 
