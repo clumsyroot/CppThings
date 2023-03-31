@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -188,13 +189,35 @@ public:
     // 判断是否为 对称二叉树
     bool isSymmetric(TreeNode *root)
     {
-        // 递归
         if (root == nullptr)
             return true;
 
-        return isSymmetric(root->left, root->right);
+        // 递归
+        // return isSymmetric(root->left, root->right);
 
-        
+        // 迭代
+        queue<TreeNode *> cur;
+        cur.push(root->left);
+        cur.push(root->right);
+        TreeNode *p, *q;
+        while (!cur.empty())
+        {
+            p = cur.front();
+            cur.pop();
+            q = cur.front();
+            cur.pop();
+            if (!p && !q)
+            {
+                continue;
+            }
+            if ((!p || !q) || (p->val != q->val))
+                return false;
+            cur.push(p->left);
+            cur.push(q->right);
+            cur.push(p->right);
+            cur.push(q->left);
+        }
+        return true;
     }
 
     bool isSymmetric(TreeNode *p, TreeNode *q)
@@ -208,6 +231,12 @@ public:
             return false;
         }
         return p->val == q->val && isSymmetric(p->left, q->right) && isSymmetric(p->right, q->left);
+    }
+
+    // 二叉树的最大深度
+    int maxDepth(TreeNode *root)
+    {
+        
     }
 };
 
