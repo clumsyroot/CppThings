@@ -291,20 +291,36 @@ public:
     // 给定一个二叉树, 判断它是否是高度平衡的二叉树
     bool isBalanced(TreeNode *root)
     {
-        
+        if (!root)
+        {
+            return true;
+        }
+
+        // 这样写会 ER！C++ 中非零值都为 true！
+        // return !(abs(height(root->left) - height(root->right)) - 1) && isBalanced(root->left) && isBalanced(root->right);
+        // 下面这样才对
+        return abs(maxDepth(root->left) - maxDepth(root->right)) <= 1 && isBalanced(root->left) && isBalanced(root->right);
     }
 };
 
 int main()
 {
     Solution solution;
-    vector<int> nums;
-    nums.push_back(0);
-    nums.push_back(1);
-    nums.push_back(2);
-    nums.push_back(3);
-    nums.push_back(4);
-    nums.push_back(5);
-    solution.sortedArrayToBST(nums);
+    // vector<int> nums;
+    // nums.push_back(0);
+    // nums.push_back(1);
+    // nums.push_back(2);
+    // nums.push_back(3);
+    // nums.push_back(4);
+    // nums.push_back(5);
+    // solution.sortedArrayToBST(nums);
+    // TreeNode *root = new TreeNode(3);
+    // root->left = new TreeNode(9);
+    // root->right = new TreeNode(20);
+    // root->right->right = new TreeNode(7);
+    // root->right->left = new TreeNode(15);
+
+    // bool ans = solution.isBalanced(root);
+    cout << !(-1) << endl; // !(-1) --> false (-1) 为 true
     return 0;
 }
