@@ -3,9 +3,10 @@
 #include <vector>
 #include <queue>
 
-using namespace std::cin;
-using namespace std::cout;
-using namespace std::endl;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::queue;
 
 struct ListNode
 {
@@ -327,7 +328,7 @@ public:
     // 二叉树的最小深度
     int minDepth(TreeNode *root)
     {
-        if (!root)
+        if (root == nullptr)
         {
             return 0;
         }
@@ -349,12 +350,27 @@ public:
 
         // 广度优先搜索 直接返回搜索到的第一个叶子节点的深度
         queue<pair<TreeNode *, int>> node_que;
-        
+        node_que.emplace(root, 1);
 
         while (!node_que.empty())
         {
-            TreeNode *cur = node_que
+            TreeNode *cur = node_que.front().first;
+            int depth = node_que.front().second;
+            node_que.pop();
+            if (cur->left == nullptr && cur->right == nullptr)
+            {
+                return depth;
+            }
+            if (cur->left != nullptr)
+            {
+                node_que.emplace(cur->left, depth + 1);
+            }
+            if (cur->right != nullptr)
+            {
+                node_que.emplace(cur->right, depth + 1);
+            }
         }
+        return 0;
     }
 };
 
