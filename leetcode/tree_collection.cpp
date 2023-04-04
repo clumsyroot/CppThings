@@ -3,7 +3,9 @@
 #include <vector>
 #include <queue>
 
-using namespace std;
+using namespace std::cin;
+using namespace std::cout;
+using namespace std::endl;
 
 struct ListNode
 {
@@ -295,11 +297,64 @@ public:
         {
             return true;
         }
-
+        // 自顶向下的递归
         // 这样写会 ER！C++ 中非零值都为 true！
         // return !(abs(height(root->left) - height(root->right)) - 1) && isBalanced(root->left) && isBalanced(root->right);
         // 下面这样才对
-        return abs(maxDepth(root->left) - maxDepth(root->right)) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+        // return abs(maxDepth(root->left) - maxDepth(root->right)) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+        // 自底向上的递归
+        return height(root) >= 0;
+    }
+
+    int height(TreeNode *root)
+    {
+        if (!root)
+        {
+            return 0;
+        }
+        int left_height = height(root->left);
+        int right_height = height(root->right);
+        if (left_height == -1 || right_height == -1 || abs(left_height - right_height) > 1)
+        {
+            return -1;
+        }
+        else
+        {
+            return max(left_height, right_height);
+        }
+    }
+
+    // 二叉树的最小深度
+    int minDepth(TreeNode *root)
+    {
+        if (!root)
+        {
+            return 0;
+        }
+        // 深度优先搜索 递归
+        // if (!root->left && !root->right)
+        // {
+        //     return 1;
+        // }
+        // int min_depth = INT_MAX;
+        // if (root->left)
+        // {
+        //     min_depth = min(minDepth(root->left), min_depth);
+        // }
+        // if (root->right)
+        // {
+        //     min_depth = min(minDepth(root->right), min_depth);
+        // }
+        // return min_depth + 1;
+
+        // 广度优先搜索 直接返回搜索到的第一个叶子节点的深度
+        queue<pair<TreeNode *, int>> node_que;
+        
+
+        while (!node_que.empty())
+        {
+            TreeNode *cur = node_que
+        }
     }
 };
 
