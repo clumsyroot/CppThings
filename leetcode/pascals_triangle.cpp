@@ -22,11 +22,11 @@ public:
         }
         return ans;
     }
-    // 杨辉三角 II
+    // 杨辉三角 II 返回第 rowIndex 列
     vector<int> getRow(int rowIndex)
     {
         // 滚动数组
-        vector<int> pre, cur(1);
+        vector<int> pre, cur;
         int idx = 0;
         int front;
         while (idx <= rowIndex)
