@@ -403,6 +403,13 @@ public:
             }
         }
         return false;
+
+        // 递归
+        // if (root->left == nullptr && root->right == nullptr)
+        // {
+        //     return sum == root->val;
+        // }
+        // return hasPathSum(root->left, sum - root->left->val) || hasPathSum(root->right, sum - root->right->val);
     }
 };
 
