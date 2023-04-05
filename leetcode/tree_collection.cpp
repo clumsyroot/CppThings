@@ -372,6 +372,38 @@ public:
         }
         return 0;
     }
+
+    // 路径总和
+    bool hasPathSum(TreeNode *root, int targetSum)
+    {
+        if (root == nullptr)
+        {
+            return false;
+        }
+
+        // 广度优先遍历 遇到路径和为 target 的叶子节点直接返回 true
+        queue<pair<TreeNode *, int>> node_que;
+        node_que.emplace(root, root->val);
+        while (!node_que.empty())
+        {
+            TreeNode *cur = node_que.front().first;
+            int distance = node_que.front().second;
+            node_que.pop();
+            if (cur->left == nullptr && cur->right == nullptr && distance == targetSum)
+            {
+                return true;
+            }
+            if (cur->left != nullptr)
+            {
+                node_que.emplace(cur->left, cur->left->val + distance);
+            }
+            if (cur->right != nullptr)
+            {
+                node_que.emplace(cur->right, cur->right->val + distance);
+            }
+        }
+        return false;
+    }
 };
 
 int main()
