@@ -7,7 +7,7 @@ using std::vector;
 class Solution
 {
 public:
-    // 杨辉三角
+    // 杨辉三角 -- 二维数组
     vector<vector<int>> generate(int numRows)
     {
         vector<vector<int>> ans(numRows);
@@ -22,7 +22,7 @@ public:
         }
         return ans;
     }
-    // 杨辉三角 II 返回第 rowIndex 列
+    // 杨辉三角 II 返回第 rowIndex 列 -- 滚动数组
     vector<int> getRow(int rowIndex)
     {
         // 滚动数组
@@ -41,6 +41,33 @@ public:
             idx++;
         }
         return cur;
+    }
+
+    // 买卖股票的最佳时机
+    int maxProfit(vector<int> &prices)
+    {
+        // int ans = 0, n = prices.size();
+        // 暴力求解 超时
+        // for (int i = 0; i < n; i++)
+        // {
+        //     for (int j = i + 1; j < n; j++)
+        //     {
+        //         int cur = prices[j] - prices[i];
+        //         if (cur > ans)
+        //         {
+        //             ans = cur;
+        //         }
+        //     }
+        // }
+        // return ans;
+
+        int min_price = INT_MAX, max_profit = 0;
+        for (auto &&price : prices)
+        {
+            min_price = min(min_price, price);
+            max_profit = max(max_profit, price - min_price);
+        }
+        return max_profit;
     }
 };
 
