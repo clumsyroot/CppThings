@@ -69,6 +69,11 @@ public:
         }
         return max_profit;
     }
+
+    // 验证 回文串
+    bool isPalindrome(string s)
+    {
+    }
 };
 
 int main()
