@@ -422,21 +422,72 @@ public:
         {
             return ans;
         }
+        // 迭代
+        // stack<TreeNode *> node_stk;
+        // node_stk.push(root);
+        // while (!node_stk.empty())
+        // {
+        //     root = node_stk.top();
+        //     node_stk.pop();
+        //     ans.emplace_back(root->val);
+        //     if (root->right != nullptr)
+        //     {
+        //         node_stk.emplace(root->right);
+        //     }
+        //     if (root->left != nullptr)
+        //     {
+        //         node_stk.emplace(root->left);
+        //     }
+        // }
+        // return ans;
 
-        stack<TreeNode *> node_stk;
-        node_stk.push(root);
-        while (!node_stk.empty())
+        // 递归
+        vector<int> ans;
+        preorder(root, ans);
+        return ans;
+    }
+
+    void preorder(TreeNode *root, vector<int> &ans)
+    {
+        if (root == nullptr)
         {
+            return;
+        }
+        ans.emplace_back(root->val);
+        preorder(root->left, ans);
+        preorder(root->right, ans);
+    }
+
+    // 二叉树的后序遍历
+    vector<int> postorderTraversal(TreeNode *root)
+    {
+        vector<int> ans;
+        if (root == nullptr)
+        {
+            return ans;
+        }
+        // 迭代
+        stack<TreeNode *> node_stk;
+        TreeNode *pre = nullptr;
+        while (root != nullptr || !node_stk.empty())
+        {
+            while (root != nullptr)
+            {
+                node_stk.emplace(root);
+                root = root->left;
+            }
             root = node_stk.top();
             node_stk.pop();
-            ans.emplace_back(root->val);
-            if (root->right != nullptr)
+            if (root->right == nullptr || root->right == pre)
             {
-                node_stk.emplace(root->right);
+                ans.emplace_back(root->val);
+                pre = root;
+                root = nullptr;
             }
-            if (root->left != nullptr)
+            else
             {
-                node_stk.emplace(root->left);
+                node_stk.emplace(root);
+                root = root->right;
             }
         }
         return ans;
