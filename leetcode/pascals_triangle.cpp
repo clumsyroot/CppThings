@@ -5,11 +5,19 @@
 #include <unordered_map>
 
 // using namespace std;
+using std::cout;
 using std::max;
 using std::min;
 using std::string;
 using std::unordered_map;
 using std::vector;
+
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
 
 class Solution
 {
@@ -140,19 +148,65 @@ public:
         }
         return ans;
     }
+
+    // 环形链表 判断链表中是否有环
+    bool hasCycle(ListNode *head)
+    {
+        // 哈希表 时间复杂度O(n^2) 空间复杂度O(n)
+        // ListNode *cur = head;
+        // unordered_map<ListNode *, int> idx;
+        // while (cur != nullptr)
+        // {
+        //     cout << cur->next << std::endl;
+        //     if (idx.find(cur->next) != idx.end())
+        //     {
+        //         return true;
+        //     }
+        //     idx[cur->next] = cur->val;
+        //     cur = cur->next;
+        // }
+        // return false;
+
+        // 快慢指针 空间复杂度 O(1)
+        // 如果存在环形 则快指针必会在环路上遇到慢指针
+        ListNode *fast = head;
+        ListNode *slow = head;
+        while (fast != nullptr)
+        {
+            fast = fast->next;
+            if (fast != nullptr)
+            {
+                fast = fast->next;
+            }
+            if (slow == fast)
+            {
+                return true;
+            }
+            slow = slow->next;
+        }
+        return false;
+    }
 };
 
 int main()
 {
     Solution solution;
-    vector<int> input;
-    input.push_back(2);
-    input.push_back(3);
-    input.push_back(4);
-    input.push_back(5);
-    input.push_back(2);
-    input.push_back(5);
-    input.push_back(3);
-    solution.singleNumber(input);
+    // vector<int> input;
+    // input.push_back(2);
+    // input.push_back(3);
+    // input.push_back(4);
+    // input.push_back(5);
+    // input.push_back(2);
+    // input.push_back(5);
+    // input.push_back(3);
+    // solution.singleNumber(input);
+
+    // ListNode *head = new ListNode(3);
+    // head->next = new ListNode(2);
+    // head->next->next = new ListNode(0);
+    // head->next->next->next = new ListNode(-4);
+
+    // solution.hasCycle(head);
+
     return 0;
 }
