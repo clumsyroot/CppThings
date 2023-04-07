@@ -86,6 +86,11 @@ public:
         for (int i = 0; i < s.length(); i++)
         {
             char cur = s.at(i);
+            if (cur >= 48 && cur <= 57)
+            {
+                ans.insert(ans.end(), cur);
+                continue;
+            }
             if (cur > 'z' || cur < 'a')
             {
                 cur = cur + 32;
