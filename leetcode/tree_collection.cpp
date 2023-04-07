@@ -7,6 +7,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::queue;
+using std::stack;
+using std::vector;
 
 struct ListNode
 {
@@ -373,7 +375,7 @@ public:
         return 0;
     }
 
-    // 路径总和
+    // 路径总和 判断是否存在 到叶子节点的路径为 target
     bool hasPathSum(TreeNode *root, int targetSum)
     {
         if (root == nullptr)
@@ -410,6 +412,34 @@ public:
         //     return sum == root->val;
         // }
         // return hasPathSum(root->left, sum - root->left->val) || hasPathSum(root->right, sum - root->right->val);
+    }
+
+    // 二叉树的前序遍历 root->left->right
+    vector<int> preorderTraversal(TreeNode *root)
+    {
+        vector<int> ans;
+        if (root == nullptr)
+        {
+            return ans;
+        }
+
+        stack<TreeNode *> node_stk;
+        node_stk.push(root);
+        while (!node_stk.empty())
+        {
+            root = node_stk.top();
+            node_stk.pop();
+            ans.emplace_back(root->val);
+            if (root->right != nullptr)
+            {
+                node_stk.emplace(root->right);
+            }
+            if (root->left != nullptr)
+            {
+                node_stk.emplace(root->left);
+            }
+        }
+        return ans;
     }
 };
 
