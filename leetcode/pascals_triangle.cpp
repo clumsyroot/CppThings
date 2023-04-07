@@ -1,7 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <climits>
 
 // using namespace std;
+using std::max;
+using std::min;
+using std::string;
 using std::vector;
 
 class Solution
@@ -73,12 +78,41 @@ public:
     // 验证 回文串
     bool isPalindrome(string s)
     {
+        if (s == " " || s == "")
+        {
+            return true;
+        }
+        string ans;
+        for (int i = 0; i < s.length(); i++)
+        {
+            char cur = s.at(i);
+            if (cur > 'z' || cur < 'a')
+            {
+                cur = cur + 32;
+                if (cur > 'z' || cur < 'a')
+                {
+                    continue;
+                }
+                ans.insert(ans.end(), cur);
+                continue;
+            }
+            ans.insert(ans.end(), cur);
+        }
+        int n = ans.length() - 1;
+        for (int i = n; i > -1; i--)
+        {
+            if (ans.at(i) != ans.at(n - i))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 };
 
 int main()
 {
     Solution solution;
-    solution.getRow(3);
+    solution.isPalindrome("0P");
     return 0;
 }
