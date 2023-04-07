@@ -2,11 +2,13 @@
 #include <vector>
 #include <string>
 #include <climits>
+#include <unordered_map>
 
 // using namespace std;
 using std::max;
 using std::min;
 using std::string;
+using std::unordered_map;
 using std::vector;
 
 class Solution
@@ -75,7 +77,7 @@ public:
         return max_profit;
     }
 
-    // 验证 回文串
+    // 验证 回文串 isalnum(): 判断是否由数字、字母 组成 | tolower(): 转换成小写
     bool isPalindrome(string s)
     {
         if (s == " " || s == "")
@@ -113,11 +115,44 @@ public:
         }
         return true;
     }
+
+    // 找出只出现一次的数字 位运算 异或
+    int singleNumber(vector<int> &nums)
+    {
+        // 哈希表 空间复杂度 O(n)
+        // unordered_map<int, int> cur;
+        // for (auto &&num : nums)
+        // {
+        //     if (cur.find(num) == cur.end())
+        //     {
+        //         cur[num] = 1;
+        //         continue;
+        //     }
+        //     cur.erase(num);
+        // }
+        // return cur.begin()->first;
+
+        // 位运算 异或 空间复杂度 O(1)
+        int ans = 0;
+        for (auto &&num : nums)
+        {
+            ans ^= num; // 位运算 二进制异或
+        }
+        return ans;
+    }
 };
 
 int main()
 {
     Solution solution;
-    solution.isPalindrome("0P");
+    vector<int> input;
+    input.push_back(2);
+    input.push_back(3);
+    input.push_back(4);
+    input.push_back(5);
+    input.push_back(2);
+    input.push_back(5);
+    input.push_back(3);
+    solution.singleNumber(input);
     return 0;
 }
