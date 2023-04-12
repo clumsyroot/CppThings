@@ -166,10 +166,7 @@ public:
 
     void inorderTraversal(TreeNode *root, vector<int> &ans)
     {
-        if (!root)
-        {
-            return;
-        }
+        if (!root) return;
         inorderTraversal(root->left, ans);
         ans.push_back(root->val);
         inorderTraversal(root->right, ans);
@@ -179,22 +176,15 @@ public:
     bool isSameTree(TreeNode *p, TreeNode *q)
     {
         // 递归
-        if (p == nullptr && q == nullptr)
-        {
-            return true;
-        }
-        if (p == nullptr || q == nullptr)
-        {
-            return false;
-        }
+        if (p == nullptr && q == nullptr) return true;
+        if (p == nullptr || q == nullptr) return false;
         return p->val == q->val && isSameTree(p->left, q->left) && isSameTree(q->right, p->right);
     }
 
     // 判断是否为 对称二叉树
     bool isSymmetric(TreeNode *root)
     {
-        if (root == nullptr)
-            return true;
+        if (root == nullptr) return true;
 
         // 递归
         // return isSymmetric(root->left, root->right);
@@ -226,24 +216,15 @@ public:
 
     bool isSymmetric(TreeNode *p, TreeNode *q)
     {
-        if (!p && !q)
-        {
-            return true;
-        }
-        if (!p || !q)
-        {
-            return false;
-        }
+        if (!p && !q) return true;
+        if (!p || !q) return false;
         return p->val == q->val && isSymmetric(p->left, q->right) && isSymmetric(p->right, q->left);
     }
 
     // 二叉树的最大深度
     int maxDepth(TreeNode *root)
     {
-        if (!root)
-        {
-            return 0;
-        }
+        if (!root) return 0;
         // 递归、深度优先搜索
         // return max(maxDepth(root->left), maxDepth(root->right)) + 1;
 
@@ -282,10 +263,8 @@ public:
 
     TreeNode *sortedArrayToBST(vector<int> &nums, int left, int right)
     {
-        if (left > right)
-        {
-            return nullptr;
-        }
+        if (left > right) return nullptr;
+
         int mid = (left + right) / 2;
         TreeNode *root = new TreeNode(nums[mid]);
         root->left = sortedArrayToBST(nums, left, mid - 1);
@@ -296,10 +275,7 @@ public:
     // 给定一个二叉树, 判断它是否是高度平衡的二叉树
     bool isBalanced(TreeNode *root)
     {
-        if (!root)
-        {
-            return true;
-        }
+        if (!root) return true;
         // 自顶向下的递归
         // 这样写会 ER！C++ 中非零值都为 true！
         // return !(abs(height(root->left) - height(root->right)) - 1) && isBalanced(root->left) && isBalanced(root->right);
@@ -311,10 +287,8 @@ public:
 
     int height(TreeNode *root)
     {
-        if (!root)
-        {
-            return 0;
-        }
+        if (!root) return 0;
+
         int left_height = height(root->left);
         int right_height = height(root->right);
         if (left_height == -1 || right_height == -1 || abs(left_height - right_height) > 1)
@@ -330,10 +304,7 @@ public:
     // 二叉树的最小深度
     int minDepth(TreeNode *root)
     {
-        if (root == nullptr)
-        {
-            return 0;
-        }
+        if (root == nullptr) return 0;
         // 深度优先搜索 递归
         // if (!root->left && !root->right)
         // {
@@ -378,10 +349,7 @@ public:
     // 路径总和 判断是否存在 到叶子节点的路径为 target
     bool hasPathSum(TreeNode *root, int targetSum)
     {
-        if (root == nullptr)
-        {
-            return false;
-        }
+        if (root == nullptr) return false;
 
         // 广度优先遍历 遇到路径和为 target 的叶子节点直接返回 true
         queue<pair<TreeNode *, int>> node_que;
@@ -418,10 +386,7 @@ public:
     vector<int> preorderTraversal(TreeNode *root)
     {
         vector<int> ans;
-        if (root == nullptr)
-        {
-            return ans;
-        }
+        if (root == nullptr) return ans;
         // 迭代
         // stack<TreeNode *> node_stk;
         // node_stk.push(root);
