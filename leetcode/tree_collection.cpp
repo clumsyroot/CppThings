@@ -1,7 +1,7 @@
 #include <iostream>
+#include <queue>
 #include <stack>
 #include <vector>
-#include <queue>
 
 using std::cin;
 using std::cout;
@@ -449,10 +449,7 @@ public:
 
     void preorder(TreeNode *root, vector<int> &ans)
     {
-        if (root == nullptr)
-        {
-            return;
-        }
+        if (root == nullptr) return;
         ans.emplace_back(root->val);
         preorder(root->left, ans);
         preorder(root->right, ans);
@@ -462,10 +459,7 @@ public:
     vector<int> postorderTraversal(TreeNode *root)
     {
         vector<int> ans;
-        if (root == nullptr)
-        {
-            return ans;
-        }
+        if (root == nullptr) return ans;
         // 迭代
         stack<TreeNode *> node_stk;
         TreeNode *pre = nullptr;
