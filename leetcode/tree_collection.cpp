@@ -3,12 +3,13 @@
 #include <stack>
 #include <vector>
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::queue;
-using std::stack;
-using std::vector;
+using namespace std;
+// using std::cin;
+// using std::cout;
+// using std::endl;
+// using std::queue;
+// using std::stack;
+// using std::vector;
 
 struct ListNode
 {
@@ -67,6 +68,7 @@ public:
     // 合并两个有序数组
     void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
     {
+        using namespace std;
         // int idx = nums1.size() - 1;
         // while (m > 0 && n > 0)
         // {
@@ -287,6 +289,7 @@ public:
 
     int height(TreeNode *root)
     {
+        using namespace std;
         if (!root) return 0;
 
         int left_height = height(root->left);
@@ -407,7 +410,6 @@ public:
         // return ans;
 
         // 递归
-        vector<int> ans;
         preorder(root, ans);
         return ans;
     }
