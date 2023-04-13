@@ -12,10 +12,16 @@ int main()
     unsigned int u_int = UINT_MAX;
     cout << "Win64 int is " << sizeof(int) << " bytes." << endl;    // win64 -- 4 bytes
     cout << "Win64 int long " << sizeof(long) << " bytes." << endl; // win64 -- 8 bytes
-    cout << max_int << endl;
-    cout << min_int << endl;
-    cout << u_int << endl;
-    cout << t << endl;
+    cout << "Win64 Int Max is " << max_int << endl;
+    cout << "Win64 Int Min is " << min_int << endl;
+    cout << "Win64 Unsigned Int Max is " << u_int << endl;
+    cout << "负数下溢变成最大正数" << t << endl;
+
+    // 进制
+    int chest = 42;
+    cout << "decimal " << chest << endl;
+    cout << hex << "hex " << chest << endl;
+    cout << oct << "octal " << chest << endl;
 
     char ch = 65; // char 整型 存储字符对应的数值编码
     cout << '$' << endl;
