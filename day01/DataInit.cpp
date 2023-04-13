@@ -7,12 +7,24 @@ int main()
     using namespace std;
     int max_int = INT_MAX; // 2^bits - 1
     int min_int = INT_MIN; // - 2^bits
+    int t;
+    t = min_int - 1; // 下溢
     unsigned int u_int = UINT_MAX;
     cout << "Win64 int is " << sizeof(int) << " bytes." << endl;    // win64 -- 4 bytes
     cout << "Win64 int long " << sizeof(long) << " bytes." << endl; // win64 -- 8 bytes
     cout << max_int << endl;
     cout << min_int << endl;
     cout << u_int << endl;
+    cout << t << endl;
+
+    char ch = 65; // char 整型 存储字符对应的数值编码
+    cout << '$' << endl;
+    cout.put('$') << endl;
+    cout << ch << endl;
+    char alarm = '\a';
+    int n_alarm = alarm;
+    cout << alarm << "Don't do that again!\a\n";
+    cout << n_alarm << endl;
 
     return 0;
 }
