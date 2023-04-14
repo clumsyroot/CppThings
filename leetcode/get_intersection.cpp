@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 struct ListNode
@@ -72,7 +73,7 @@ public:
     }
 
     // Excel 列表名称 -- 进制转换 (26 进制)
-    string convertToTitle(int columnNumber)
+    std::string convertToTitle(int columnNumber)
     {
         using namespace std;
         string ans;
@@ -88,23 +89,62 @@ public:
     }
 
     // 多数元素 返回数组中出现次数大于 [n/2] 的元素
-    int majorityElement(vector<int> &nums)
+    int majorityElement(std::vector<int> &nums)
     {
         using namespace std;
         int n = nums.size();
-        
+        // 哈希表 空间复杂度 O(n) 时间复杂度 O(n)
+        // unordered_map<int, int> counts;
+        // for (auto &&i : nums)
+        // {
+        //     counts[i]++;
+        //     if (counts[i] > n / 2) return i;
+        // }
+        // return 0;
+
+        // 排序 空间复杂度 O(1) 时间复杂度 O(nlogn)
+        // sort(nums.begin(), nums.end());
+        // return nums[n / 2];
+
+        // 随机查找
+        // while (true)
+        // {
+        //     int candidate = nums[rand() % n];
+        //     int count = 0;
+        //     for (auto &&i : nums)
+        //     {
+        //         if (i == candidate) count++;
+        //     }
+        //     if (count > n / 2) return candidate;
+        // }
+
+        // Boyer-Moore 投票算法 -- bravo! 算法真是太好玩了
+        int candidate;
+        int count = 0;
+        for (auto &&i : nums)
+        {
+            if (count == 0) candidate = i;
+            count += (i == candidate) ? 1 : -1;
+        }
+        return candidate;
     }
 };
 
 int main()
 {
-    ListNode *head = new ListNode(4);
-    head->next = new ListNode(1);
-    head = head->next;
-    head->next = new ListNode(8);
+    using namespace std;
+    // ListNode *head = new ListNode(4);
+    // head->next = new ListNode(1);
+    // head = head->next;
+    // head->next = new ListNode(8);
 
     Solution solution;
-    solution.getIntersectionNode(head, head);
+    vector<int> nums;
+    nums.emplace_back(3);
+    nums.emplace_back(2);
+    nums.emplace_back(3);
+    solution.majorityElement(nums);
+    // solution.getIntersectionNode(head, head);
 
     return 0;
 }
