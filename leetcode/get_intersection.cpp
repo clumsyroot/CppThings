@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -88,6 +89,18 @@ public:
         return ans;
     }
 
+    // Excel 表列序号
+    int titleToNumber(std::string columnTitle)
+    {
+        int n = columnTitle.length(), i = 0, ans = 0;
+        while (i < n)
+        {
+            ans = ans * 26 + (columnTitle[i] - 64);
+            i++;
+        }
+        return ans;
+    }
+
     // 多数元素 返回数组中出现次数大于 [n/2] 的元素
     int majorityElement(std::vector<int> &nums)
     {
@@ -140,12 +153,13 @@ int main()
     // head->next = new ListNode(8);
 
     Solution solution;
-    vector<int> nums;
-    nums.emplace_back(3);
-    nums.emplace_back(2);
-    nums.emplace_back(3);
-    solution.majorityElement(nums);
+    // vector<int> nums;
+    // nums.emplace_back(3);
+    // nums.emplace_back(2);
+    // nums.emplace_back(3);
+    // solution.majorityElement(nums);
     // solution.getIntersectionNode(head, head);
+    solution.titleToNumber("FXSHRXW");
 
     return 0;
 }
