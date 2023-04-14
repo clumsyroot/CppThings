@@ -119,6 +119,7 @@ public:
         // }
 
         // Boyer-Moore 投票算法 -- bravo! 算法真是太好玩了
+        // 适用于多数大于 n/2
         int candidate;
         int count = 0;
         for (auto &&i : nums)
