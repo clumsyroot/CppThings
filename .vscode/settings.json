@@ -44,7 +44,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "cfloat": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
