@@ -131,7 +131,7 @@ public:
         //     if (count > n / 2) return candidate;
         // }
 
-        // Boyer-Moore 投票算法 -- bravo! 算法真是太好玩了
+        // Boyer-Moore 投票算法 -- bravo!
         // 适用于多数大于 n/2
         int candidate;
         int count = 0;
