@@ -19,5 +19,17 @@ int main()
     cout << "Size of Int * is " << sizeof(p_updates) << " Bytes." << endl;
     cout << "Size of Double * is " << sizeof(d_updates) << " Bytes." << endl;
 
+    int higgens = 5;
+    int *pt = &higgens; // VALID 'int*' 和 'int' 是两种类型
+    // *pt = &higgens;     // INVALID invalid conversion from ‘int*’ to ‘int’ [-fpermissive]
+    // pt -- 指针类型  *pt 整数型
+    cout << "Value of higgens = " << higgens
+         << ", address of higgens = " << &higgens << endl;
+    cout << "Value of *pt = " << *pt
+         << ", value of pt = " << pt << endl;
+
+    int *addr;
+    addr = (int *)0xB8000000;
+
     return 0;
 }
