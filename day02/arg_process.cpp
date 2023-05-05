@@ -3,6 +3,8 @@
 
 int main(int argc, char *argv[])
 {
+    // 'argc' 包含了命令行参数的个数 (包括程序名称本身)
+    // 'argv' 参数是指向每一个命令行参数的指针数组
     using namespace std;
     int opt;
     const char *str = "p:l:m:o:s:t:c:a:";
