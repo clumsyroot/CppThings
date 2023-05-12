@@ -34,6 +34,56 @@ public:
 
         return n;
     }
+
+    // 统计 二进制 中 1 的个数
+    int hammingWeight(uint32_t n)
+    {
+        using namespace std;
+        cout << bitset<32>(n) << endl;
+
+        int ans = 0;
+        // for (int i = 0; i < 32; i++)
+        // {
+        //     if (n & (1 << i))
+        //     {
+        //         ans++;
+        //     }
+        // }
+
+        // 优化 -- n & (n - 1) 为将 n 位二进制中最低位的 1 变为 0 后的结果
+        while (n)
+        {
+            n &= (n - 1);
+            ans++;
+        }
+        return ans;
+    }
+
+    // 快慢指针
+    bool isHappy(int n)
+    {
+        int slowRunner = n;
+        int fastRunner = getNext(n);
+        while (fastRunner != 1 || fastRunner != slowRunner)
+        {
+            slowRunner = getNext(slowRunner);
+            fastRunner = getNext(getNext(fastRunner));
+        }
+        return fastRunner == 1;
+    }
+
+private:
+    int getNext(int n)
+    {
+        int totalSum = 0;
+        while (n > 0)
+        {
+            int cur = n % 10;
+            totalSum += cur * cur;
+            n = n / 10;
+        }
+        return totalSum;
+    }
 };
 
 int main()
