@@ -1,6 +1,6 @@
+#include "list_struct.h"
 #include <bitset>
 #include <iostream>
-
 class Solution
 {
 private:
@@ -42,6 +42,7 @@ public:
         cout << bitset<32>(n) << endl;
 
         int ans = 0;
+        // 顺序查找
         // for (int i = 0; i < 32; i++)
         // {
         //     if (n & (1 << i))
@@ -70,6 +71,50 @@ public:
             fastRunner = getNext(getNext(fastRunner));
         }
         return fastRunner == 1;
+    }
+
+    ListNode *removeElements(ListNode *head, int val)
+    {
+        // 先对头节点做处理
+        // if (head == nullptr) return head;
+        // while (head->val == val)
+        // {
+        //     head = head->next;
+        //     if (head == nullptr) return head;
+        // }
+
+        // ListNode *cur = head;
+        // while (cur->next != nullptr)
+        // {
+        //     if (cur->next->val == val)
+        //     {
+        //         cur->next = cur->next->next;
+        //     }
+        //     else
+        //     {
+        //         cur = cur->next;
+        //     }
+        // }
+
+        // return head;
+
+        // 在头节点之前添加虚拟节点 dummyNode, 最后返回 dummyNode -> next
+        ListNode *dummyNode = new ListNode(val - 1);
+        dummyNode->next = head;
+
+        ListNode *cur = dummyNode;
+        while (cur->next != nullptr)
+        {
+            if (cur->next->val == val)
+            {
+                cur->next = cur->next->next;
+            }
+            else
+            {
+                cur = cur->next;
+            }
+        }
+        return dummyNode->next;
     }
 
 private:
