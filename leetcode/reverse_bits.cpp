@@ -1,6 +1,8 @@
 #include "list_struct.h"
 #include <bitset>
 #include <iostream>
+#include <string>
+#include <unordered_map>
 class Solution
 {
 private:
@@ -115,6 +117,38 @@ public:
             }
         }
         return dummyNode->next;
+
+        // 递归
+        // if (head == nullptr) return nullptr;
+
+        // head->next = removeElements(head->next, val);
+        // if (head->val == val)
+        // {
+        //     return head->next;
+        // }
+        // else
+        // {
+        //     return head;
+        // }
+    }
+
+    bool isIsomorphic(string s, string t)
+    {
+        using namespace std;
+        unordered_map<char, char> s2t;
+        unordered_map<char, char> t2s;
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            char s_i = s.at(i), t_i = t.at(i);
+            if ((s2t.count(s_i) && s2t[s_i] != t_i) || (t2s.count(t_i) && t2s[t_i] != s_i))
+            {
+                return false;
+            }
+            s2t[s_i] = t_i;
+            t2s[t_i] = s_i;
+        }
+        return true;
     }
 
 private:
