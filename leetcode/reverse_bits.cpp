@@ -14,6 +14,19 @@ private:
     const uint32_t M4 = 0x0f0f0f0f;
     const uint32_t M8 = 0x00ff00ff;
 
+private:
+    int getNext(int n)
+    {
+        int totalSum = 0;
+        while (n > 0)
+        {
+            int cur = n % 10;
+            totalSum += cur * cur;
+            n = n / 10;
+        }
+        return totalSum;
+    }
+
 public:
     // 颠倒给定的 32 位无符号二进制位
     uint32_t reverseBits(uint32_t n)
@@ -149,19 +162,6 @@ public:
             t2s[t_i] = s_i;
         }
         return true;
-    }
-
-private:
-    int getNext(int n)
-    {
-        int totalSum = 0;
-        while (n > 0)
-        {
-            int cur = n % 10;
-            totalSum += cur * cur;
-            n = n / 10;
-        }
-        return totalSum;
     }
 };
 
