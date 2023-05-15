@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 class Solution
 {
 private:
@@ -88,6 +89,7 @@ public:
         return fastRunner == 1;
     }
 
+    // 移除链表中的元素
     ListNode *removeElements(ListNode *head, int val)
     {
         // 先对头节点做处理
@@ -162,6 +164,83 @@ public:
             t2s[t_i] = s_i;
         }
         return true;
+    }
+
+    // 反转链表
+    ListNode *reverseList(ListNode *head)
+    {
+        using namespace std;
+        if (head == nullptr) return nullptr;
+
+        // 逻辑推理
+        // ListNode *cur = head;
+        // vector<int> index;
+        // int count = 0;
+        // while (cur != nullptr)
+        // {
+        //     index.emplace_back(cur->val);
+        //     cur = cur->next;
+        //     count++;
+        // }
+        // cur = head;
+        // while (count > 0)
+        // {
+        //     cur->val = index[count - 1];
+        //     count--;
+        //     cur = cur->next;
+        // }
+        // return head;
+
+        // 双指针
+        ListNode *pre = head, *cur = nullptr, *t;
+        while (pre != nullptr)
+        {
+            t = pre->next;
+            pre->next = cur;
+            cur = pre;
+            pre = t;
+        }
+        return cur;
+    }
+
+    // 判断数组中是否存在重复元素
+    bool containsDuplicate(vector<int> &nums)
+    {
+        using namespace std;
+        unordered_map<int, int> umap;
+        for (auto &&i : nums)
+        {
+            if (umap.find(i) == umap.end())
+            {
+                umap[i] = 1;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 是否存在重复元素 II
+    bool containsNearbyDuplicate(vector<int> &nums, int k)
+    {
+        using namespace std;
+        unordered_map<int, int> umap;
+
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (umap.find(nums[i]) == umap.end())
+            {
+                umap[nums[i]] = i;
+            }
+            else
+            {
+                if (i - umap[nums[i]] <= k) return true;
+                umap[nums[i]] = i;
+            }
+        }
+        return false;
     }
 };
 
