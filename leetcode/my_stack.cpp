@@ -46,12 +46,3 @@ int main()
 
     return 0;
 }
-
-Time Time::sum()(const Time &t) const
-{
-    Time sum;
-    sum.minutes = minutes + t.minutes;
-    sum.hours = hours + t.hours + sum.minutes / 60;
-    sum.minutes % %= 60;
-    return sum;
-}
