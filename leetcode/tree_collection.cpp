@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 #include <queue>
 #include <stack>
 #include <vector>
@@ -458,11 +459,28 @@ public:
     TreeNode *invertTree(TreeNode *root)
     {
         // 递归
+        // if (root == nullptr) return nullptr;
+        // TreeNode *left = invertTree(root->left);
+        // TreeNode *right = invertTree(root->right);
+        // root->left = right;
+        // root->right = left;
+        // return root;
+
+        // 迭代
         if (root == nullptr) return nullptr;
-        TreeNode *left = invertTree(root->left);
-        TreeNode *right = invertTree(root->right);
-        root->left = right;
-        root->right = left;
+
+        std::stack<TreeNode *> stk;
+        stk.push(root);
+        while (!stk.empty())
+        {
+            TreeNode *cur = stk.top();
+            stk.pop();
+            TreeNode *tmp = cur->left;
+            cur->left = cur->right;
+            cur->right = tmp;
+            if (cur->left != nullptr) stk.push(cur->left);
+            if (cur->right != nullptr) stk.push(cur->right);
+        }
         return root;
     }
 };
