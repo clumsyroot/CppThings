@@ -1,3 +1,4 @@
 git add .
-git commit -m "regular commit $(date +%Y-%m-%d)"
+git commit -m "$1"
 git push -u github master
+git push -u gitee master
