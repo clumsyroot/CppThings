@@ -8,6 +8,19 @@
 
 class Solution
 {
+    // 此处 ans 传入的应该为引用
+    void dfs(TreeNode *m_root, std::string m_path, std::vector<std::string> &ans)
+    {
+        if (m_root == nullptr) return;
+        if (m_root->left == nullptr && m_root->right == nullptr)
+        {
+            ans.emplace_back(m_path + std::to_string(m_root->val));
+        }
+        m_path = m_path + std::to_string(m_root->val) + "->";
+        dfs(m_root->left, m_path, ans);
+        dfs(m_root->right, m_path, ans);
+    }
+
 public:
     // 判断是否是 2 的幂
     bool isPowerOfTwo(int n)
@@ -80,28 +93,42 @@ public:
         return true;
     }
 
-    vector<string> binaryTreePaths(TreeNode *root)
+    std::vector<std::string> binaryTreePaths(TreeNode *root)
     {
-        if (root == nullptr) return NULL;
-        std::stack<*TreeNode> stk;
+        // 深度优先遍历 迭代
+        // std::vector<std::string> ans;
+        // if (root == nullptr) return ans;
+
+        // std::stack<TreeNode *> node_stk;
+        // std::stack<std::string> path_stk;
+        // node_stk.push(root);
+        // path_stk.push(std::to_string(root->val));
+
+        // while (!node_stk.empty())
+        // {
+
+        //     TreeNode *cur = node_stk.top();
+        //     std::string path = path_stk.top();
+        //     node_stk.pop();
+        //     path_stk.pop();
+        //     if (cur->left == nullptr && cur->right == nullptr) ans.emplace_back(path);
+        //     if (cur->right != nullptr)
+        //     {
+        //         node_stk.emplace(cur->right);
+        //         path_stk.emplace(path + "->" + std::to_string(cur->right->val));
+        //     }
+        //     if (cur->left != nullptr)
+        //     {
+        //         node_stk.emplace(cur->left);
+        //         path_stk.emplace(path + "->" + std::to_string(cur->left->val));
+        //     }
+        // }
+        // return ans;
+
+        // 深度优先遍历 递归
         std::vector<std::string> ans;
-        while (!stk.empty())
-        {
-            TreeNode *cur = stk.top();
-            stk.pop();
-            std::string cur_str = cur->val + "->";
-            while (cur->left != nullptr)
-            {
-                stk.push(cur->left);
-                cur_str = cur_str + "->" + cur->val;
-            }
-            ans.push_back(cur_str);
-            while (cur->right != nullptr)
-            {
-                stk.push(cur->right);
-                cur_str = cur_str + "->" + cur->val;
-            }
-        }
+        dfs(root, "", ans);
+        return ans;
     }
 };
 
@@ -109,7 +136,13 @@ int main()
 {
     using namespace std;
     Solution solution;
-    solution.isAnagram("rat", "car");
+    // solution.isAnagram("rat", "car");
+    TreeNode *root = new TreeNode(5);
+    TreeNode *cur = new TreeNode(3);
+    root = new TreeNode(2, nullptr, root);
+    root = new TreeNode(1, root, cur);
+
+    solution.binaryTreePaths(root);
 
     return 0;
 }
