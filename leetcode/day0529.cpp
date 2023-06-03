@@ -171,14 +171,31 @@ public:
         return total - sum;
     }
 
+    bool isBadVersion(int version)
+    {
+        if (version == 10) return true;
+        return false;
+    }
+
     int firstBadVersion(int n)
     {
         // 二分查找
-        int low = 0, high = n;
+        int low = 1, high = n;
+        int mid = 1;
         while (low < high)
         {
-            
+            mid = low + (high - low) / 2; // 防止溢出！
+            if (isBadVersion(mid) && !isBadVersion(mid - 1)) return mid;
+            if (isBadVersion(mid))
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
         }
+        return low;
     }
 };
 
