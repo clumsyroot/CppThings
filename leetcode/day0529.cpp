@@ -145,6 +145,41 @@ public:
         }
         return num;
     }
+
+    bool isUgly(int n)
+    {
+        if (n <= 0) return false;
+        std::vector<int> factors = {2, 3, 5};
+        for (auto &&i : factors)
+        {
+            while (n % i == 0)
+            {
+                n /= i;
+            }
+        }
+        return n == 1;
+    }
+
+    int missingNumber(std::vector<int> &nums)
+    {
+        int n = nums.size();
+        int total = n * (n + 1) / 2, sum = 0;
+        for (auto &&i : nums)
+        {
+            sum += i;
+        }
+        return total - sum;
+    }
+
+    int firstBadVersion(int n)
+    {
+        // 二分查找
+        int low = 0, high = n;
+        while (low < high)
+        {
+            
+        }
+    }
 };
 
 int main()
@@ -158,7 +193,9 @@ int main()
     // root = new TreeNode(1, root, cur);
 
     // solution.binaryTreePaths(root);
-    solution.addDigits(38);
+    // solution.addDigits(38);
+    std::vector<int> test = {1, 2, 3, 4};
+    solution.missingNumber(test);
 
     return 0;
 }
