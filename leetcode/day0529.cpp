@@ -197,6 +197,18 @@ public:
         }
         return low;
     }
+
+    void moveZeroes(std::vector<int> &nums)
+    {
+        int cur = 0;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i])
+            {
+                std::swap(nums[cur++], nums[i]);
+            };
+        }
+    }
 };
 
 int main()
