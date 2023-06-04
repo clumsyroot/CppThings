@@ -6,7 +6,7 @@ BreakBeforeBraces: Allman
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortIfStatementsOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
-IndentCaseLabels: false 
+IndentCaseLabels: false
 ColumnLimit: 0
 AccessModifierOffset: -4
 NamespaceIndentation: All
