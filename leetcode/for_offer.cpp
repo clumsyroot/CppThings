@@ -1,3 +1,5 @@
+#include "list_struct.h"
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -77,4 +79,54 @@ public:
         }
         return s;
     }
+
+    std::vector<int> reversePrint(ListNode *head)
+    {
+        // ListNode *cur = head;
+        // std::vector<int> index;
+        // while (cur != nullptr)
+        // {
+        //     index.emplace_back(cur->val);
+        //     cur = cur->next;
+        // }
+        // std::vector<int> ans;
+        // for (int i = index.size() - 1; i > -1; i--)
+        // {
+        //     ans.emplace_back(index[i]);
+        // }
+        // return ans;
+
+        // 递归
+        std::vector<int> ans;
+        m_reversePrint(head, ans);
+        return ans;
+    }
+
+    void m_reversePrint(ListNode *node, std::vector<int> &index)
+    {
+        // 注意使用引用 &
+        if (node != nullptr)
+        {
+            m_reversePrint(node->next, index);
+            index.emplace_back(node->val);
+        }
+    }
+
+    TreeNode *buildTree(std::vector<int> &preorder, std::vector<int> &inorder)
+    {
+        
+    }
 };
+
+int main()
+{
+    using namespace std;
+    Solution solution;
+    ListNode *cur = new ListNode(2);
+    cur = new ListNode(3, cur);
+    ListNode *root = new ListNode(1, cur);
+    std::cout << root << std::endl;
+    solution.reversePrint(root);
+
+    return 0;
+}
