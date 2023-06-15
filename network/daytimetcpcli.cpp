@@ -1,3 +1,4 @@
+#include "mynetwork.h"
 #include <arpa/inet.h>
 #include <cstring>
 #include <iostream>
@@ -8,7 +9,7 @@
 int main(int argc, char *argv[])
 {
     int sockfd, n;
-    char recvline[4096];
+    char recvline[MAXLINE];
     struct sockaddr_in servaddr;
 
     if (argc != 3)
@@ -26,7 +27,9 @@ int main(int argc, char *argv[])
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(atoi(argv[2]));
 
-    if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0) printf("inet_pton error for %s", argv[1]);
+    if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0)
+        printf("inet_pton error for %s", argv[1]);
+        
     if (connect(sockfd, (sockaddr *)&servaddr, sizeof(servaddr)) < 0)
     {
         perror("connnet error");
