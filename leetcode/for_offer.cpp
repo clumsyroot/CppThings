@@ -1,6 +1,8 @@
 #include "list_struct.h"
+#include "tree_struct.h"
 #include <iostream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 class Solution
@@ -112,9 +114,26 @@ public:
         }
     }
 
-    TreeNode *buildTree(std::vector<int> &preorder, std::vector<int> &inorder)
+    // TreeNode *buildTree(std::vector<int> &preorder, std::vector<int> &inorder)
+    // {
+    // }
+
+    int fib(int n)
     {
-        
+        std::unordered_map<int, int> map;
+        return m_fib(n, map);
+    }
+
+    int m_fib(int n, std::unordered_map<int, int> &map)
+    {
+        if (n == 0 || n == 1) return n;
+        if (map.find(n) != map.end())
+        {
+            return map[n];
+        }
+        int cur = (m_fib(n - 1, map) + m_fib(n - 2, map)) % 1000000007;
+        map[n] = cur;
+        return cur;
     }
 };
 
@@ -122,11 +141,13 @@ int main()
 {
     using namespace std;
     Solution solution;
-    ListNode *cur = new ListNode(2);
-    cur = new ListNode(3, cur);
-    ListNode *root = new ListNode(1, cur);
-    std::cout << root << std::endl;
-    solution.reversePrint(root);
+    // ListNode *cur = new ListNode(2);
+    // cur = new ListNode(3, cur);
+    // ListNode *root = new ListNode(1, cur);
+    // std::cout << root << std::endl;
+    // solution.reversePrint(root);
+    int ans = solution.fib(20);
+    cout << ans << endl;
 
     return 0;
 }
