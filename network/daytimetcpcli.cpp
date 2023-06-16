@@ -1,15 +1,13 @@
-#include "mynetwork.h"
+#include "mysocket.h"
 #include <arpa/inet.h>
 #include <cstring>
 #include <iostream>
-#include <netinet/in.h>
-#include <sys/socket.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[])
 {
     int sockfd, n;
-    char recvline[MAXLINE];
+    char recvline[4096];
     struct sockaddr_in servaddr;
 
     if (argc != 3)
@@ -17,11 +15,7 @@ int main(int argc, char *argv[])
         printf("WARNING! usage: <program> <IpAddress> <Port>\n");
         return 1;
     }
-    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    {
-        perror("socket error");
-        return 1;
-    }
+    sockfd = Socket(AF_INET, SOCK_STREAM, 0);
 
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
@@ -29,12 +23,8 @@ int main(int argc, char *argv[])
 
     if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0)
         printf("inet_pton error for %s", argv[1]);
-        
-    if (connect(sockfd, (sockaddr *)&servaddr, sizeof(servaddr)) < 0)
-    {
-        perror("connnet error");
-        return 1;
-    };
+
+    Connect(sockfd, (sockaddr *)&servaddr, sizeof(servaddr));
 
     while ((n = read(sockfd, recvline, 4096)) > 0)
     {

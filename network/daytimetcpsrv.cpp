@@ -1,39 +1,43 @@
-#include "mynetwork.h"
-// #include <sys/socket.h>
-#include <cstdio>
+#include "mysocket.h"
+#include <arpa/inet.h>
 #include <cstring>
+#include <iostream>
+#include <strings.h>
 #include <time.h>
+#include <unistd.h>
 
-int main(int argc, char const *argv[])
+int main(int argc, char **argv)
 {
     int listenfd, connfd;
-    struct sockaddr_in servaddr;
-    char buff[MAXLINE];
+    struct sockaddr_in servaddr, cliaddr;
+    char buff[4096];
+    socklen_t len;
     time_t ticks;
 
-    if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    {
-        perror("socket error");
-        return 1;
-    }
+    listenfd = Socket(AF_INET, SOCK_STREAM, 0);
 
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(1234);
+    servaddr.sin_port = htons(1234); // daytime server
 
-    bind(listenfd, (sockaddr *)&servaddr, sizeof(servaddr));
-    listen(listenfd, 5);
+    Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+
+    Listen(listenfd, 5);
 
     for (;;)
     {
-        connfd = accept(listenfd, (sockaddr *)NULL, NULL);
+        len = sizeof(cliaddr);
+        connfd = Accept(listenfd, (sockaddr *)&cliaddr, &len);
+        printf("connection from %s, port %d\n",
+               inet_ntop(AF_INET, &cliaddr.sin_addr, buff, sizeof(buff)),
+               //    ntohs(cliaddr.sin_port));
+               cliaddr.sin_port);
 
         ticks = time(NULL);
-
         snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
-        send(connfd, buff, strlen(buff));
-    }
+        write(connfd, buff, strlen(buff));
 
-    return 0;
+        close(connfd);
+    }
 }
