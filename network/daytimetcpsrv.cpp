@@ -4,7 +4,6 @@
 #include <iostream>
 #include <strings.h>
 #include <time.h>
-#include <unistd.h>
 
 int main(int argc, char **argv)
 {
@@ -19,7 +18,7 @@ int main(int argc, char **argv)
     memset(&servaddr, 0, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(1234); // daytime server
+    servaddr.sin_port = htons(atoi(argv[1])); // daytime server
 
     Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 
