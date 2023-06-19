@@ -1,4 +1,5 @@
 #include "mysocket.h"
+#include <iostream>
 
 // socket wrap
 int Socket(int m_family, int m_type, int m_protocol)
@@ -6,7 +7,8 @@ int Socket(int m_family, int m_type, int m_protocol)
     int n;
     if ((n = socket(m_family, m_type, m_protocol)) < 0)
     {
-        perror("scoket error");
+        std::cerr << "socket error";
+        // perror("scoket error");
         abort();
     }
     return n;
@@ -61,4 +63,15 @@ void Close(int m_sockfd)
         perror("socket close error");
         abort();
     }
+}
+
+pid_t Fork()
+{
+    pid_t pid;
+    if ((pid = fork()) < 0)
+    {
+        perror("fork error");
+        abort();
+    }
+    return pid;
 }
