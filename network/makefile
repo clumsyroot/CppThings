@@ -1,7 +1,7 @@
 CXX ?= g++
 CXXFLAGS = -c -Wall
 
-TARGET = tcpserv01
+TARGET = tcpserv01.exec
 SRC = $(wildcard ./socket/*.cpp tcpserv01.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 
