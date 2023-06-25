@@ -1,8 +1,8 @@
 CXX ?= g++
 CXXFLAGS = -c -Wall
 
-TARGET = tcpcli01
-SRC = $(wildcard ./socket/*.cpp tcpcli01.cpp)
+TARGET = tcpserv01
+SRC = $(wildcard ./socket/*.cpp tcpserv01.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 
 $(TARGET): $(OBJ)
