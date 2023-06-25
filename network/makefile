@@ -1,15 +1,15 @@
 CXX ?= g++
 CXXFLAGS = -c -Wall
 
-TARGET = tcpcli
-SRC = $(wildcard ./socket/*.cpp)
+TARGET = tcpcli01
+SRC = $(wildcard ./socket/*.cpp tcpcli01.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 
-$(TARGET): $(TARGET) $(OBJ)
+$(TARGET): $(OBJ)
 	$(CXX) -o $(TARGET) $(OBJ)
 
 %.o: %.cpp
-	$(CXX) -o $(OBJ) $(CXXFLAGS) $<
+	$(CXX) -o $@ $(CXXFLAGS) $<
 
 clean:
 	rm -f *.o $(TARGET)
