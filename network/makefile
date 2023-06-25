@@ -6,11 +6,10 @@ SRC = $(wildcard ./socket/*.cpp tcpserv01.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 
 $(TARGET): $(OBJ)
-	$(CXX) -o $(TARGET) $(OBJ)
+	$(CXX) -o $@ $^
 
 %.o: %.cpp
 	$(CXX) -o $@ $(CXXFLAGS) $<
 
 clean:
 	rm -f *.o $(TARGET)
-
