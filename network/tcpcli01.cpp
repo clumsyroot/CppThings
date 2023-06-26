@@ -7,8 +7,9 @@ void str_cli(FILE *fp, int m_sock_fd)
     while (true)
     {
         std::cin >> send_line;
-        write(m_sock_fd, send_line, strlen(send_line));
-        if (read(m_sock_fd, recv_line, 4096) == 0)
+        write(m_sock_fd, send_line, strlen(send_line) + 1);
+        std::cout << strlen(send_line) << std::endl;
+        if (read(m_sock_fd, recv_line, strlen(send_line) + 1) == 0)
         {
             perror("strcli: server error");
         }
